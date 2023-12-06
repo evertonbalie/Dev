@@ -136,6 +136,12 @@ public class Frmcliente extends javax.swing.JFrame {
 
         jLabel6.setText("Endereço:");
 
+        txtcodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcodigoActionPerformed(evt);
+            }
+        });
+
         try {
             jfcelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-####")));
         } catch (java.text.ParseException ex) {
@@ -678,6 +684,10 @@ public class Frmcliente extends javax.swing.JFrame {
     private void txtbairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbairroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbairroActionPerformed
+
+    private void txtcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcodigoActionPerformed
 
     public void formWindowActivated(java.awt.event.WindowEvent evt) {
 

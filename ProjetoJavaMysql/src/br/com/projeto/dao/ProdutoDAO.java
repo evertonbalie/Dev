@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package br.com.projeto.dao;
 
 import br.com.projeto.jdbc.ConnectionFactory;
@@ -26,9 +23,7 @@ public class ProdutoDAO {
     public ProdutoDAO(){
     this.con= new ConnectionFactory().getConnection();
     }
-       
-    
-    
+        
     
     public void cadastrarProduto(Produtos obj){
         try {
@@ -43,18 +38,15 @@ public class ProdutoDAO {
     stmt.execute();
     stmt.close();
     
-     JOptionPane.showMessageDialog(null,"cadastrado com sucesso");
+    JOptionPane.showMessageDialog(null,"cadastrado com sucesso");
      
-        } catch (Exception erro) {
-            
+        } catch (Exception erro) {   
             JOptionPane.showMessageDialog(null,"Erro"+ erro);
-            
-                      
+
                     }      
         
     }
-    
-    
+
     public List<Produtos> ListarProdutos(){
         try {
             
@@ -115,8 +107,7 @@ String sql ="update tb_produtos set descricao=?,preco=?,qtd_estoque=?, for_id=? 
            JOptionPane.showMessageDialog(null,"erro"+ e);
        }
    }
-   
-    
+
     public void ExcluirProduto(Produtos obj){
        try {
            String sql= "delete from tb_produtos where id=?";
@@ -155,9 +146,7 @@ String sql ="update tb_produtos set descricao=?,preco=?,qtd_estoque=?, for_id=? 
            
            f.setNome(rs.getString("f.nome"));
            obj.setFornecedor(f);
-           
-           
-            
+ 
           pesquisa.add(obj);
                      
             }
@@ -169,16 +158,13 @@ String sql ="update tb_produtos set descricao=?,preco=?,qtd_estoque=?, for_id=? 
            return null;
         }
         
-        
-       
-    
 }
     
-     public List<Produtos> PesquisarProdutosPorCodigo(int id) {
+     public Produtos PesquisarProdutosPorCodigo(int id) {
        
         try {
-            List<Produtos> pesquisa = new ArrayList<>();
-            String sql = "select * from tb_produtos id=?";
+            //List<Produtos> pesquisa = new ArrayList<>();
+            String sql = "select * from tb_produtos where id=?";
             
             // String sql = "select p.id,p.descricao,p.preco,p.qtd_estoque,f.nome from tb_produtos as p "
             //;;            + "inner join tb_fornecedores as f on(p.for_id=f.id) and p.id=?";
@@ -186,10 +172,10 @@ String sql ="update tb_produtos set descricao=?,preco=?,qtd_estoque=?, for_id=? 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1,id);
             ResultSet rs = stmt.executeQuery();
-            
+             Produtos obj = new Produtos();
             while(rs.next()){            
             
-           Produtos obj = new Produtos();
+          
            Fornecedores f = new Fornecedores();
            /*nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado*/
            obj.setId(rs.getInt("id"));
@@ -197,22 +183,17 @@ String sql ="update tb_produtos set descricao=?,preco=?,qtd_estoque=?, for_id=? 
            obj.setPreco(rs.getDouble("preco"));
            obj.setQtd_estoque(rs.getInt("qtd_estoque"));
            
-           f.setNome(rs.getString("f.nome"));
-           obj.setFornecedor(f);
+                System.out.println("nome"+obj.getDescricao());
            
-           
+//           f.setNome(rs.getString("f.nome"));
+//           obj.setFornecedor(f);
             
-          pesquisa.add(obj);
-                     
-            }
-            
-            return pesquisa;
-          
+            }          
+            return obj;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"erro dao exeption"+ e);
            return null;
         }
-    
-    
-}
-}
+         
+     }
+     }

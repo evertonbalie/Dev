@@ -1,9 +1,6 @@
 package br.com.projeto.view;
 
 
-
-
-
 import br.com.projeto.dao.ClientesDAO;
 import br.com.projeto.dao.ProdutoDAO;
 import br.com.projeto.model.Clientes;
@@ -11,8 +8,6 @@ import br.com.projeto.model.Produtos;
 import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-
-
 
 public class FrmVendas extends javax.swing.JFrame {
     public FrmVendas() {
@@ -33,7 +28,7 @@ public class FrmVendas extends javax.swing.JFrame {
         txtdataatual = new javax.swing.JTextField();
         btpesquisarcliente = new javax.swing.JButton();
         txtcpf = new javax.swing.JTextField();
-        txtnome = new javax.swing.JTextField();
+        txtnomen = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtcodigoproduto = new javax.swing.JTextField();
@@ -121,14 +116,14 @@ public class FrmVendas extends javax.swing.JFrame {
             }
         });
 
-        txtnome.addActionListener(new java.awt.event.ActionListener() {
+        txtnomen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnomeActionPerformed(evt);
+                txtnomenActionPerformed(evt);
             }
         });
-        txtnome.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtnomen.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtnomeKeyPressed(evt);
+                txtnomenKeyPressed(evt);
             }
         });
 
@@ -150,7 +145,7 @@ public class FrmVendas extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtnomen, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btpesquisarcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -169,7 +164,7 @@ public class FrmVendas extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(btpesquisarcliente)
-                    .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnomen, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
@@ -178,6 +173,7 @@ public class FrmVendas extends javax.swing.JFrame {
 
         jLabel5.setText("código:");
 
+        txtcodigoproduto.setText("1");
         txtcodigoproduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcodigoprodutoActionPerformed(evt);
@@ -474,25 +470,6 @@ public class FrmVendas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
 
-    
-      
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     private void txtcodigoprodutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoprodutoKeyPressed
 
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -513,38 +490,41 @@ public class FrmVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcpfActionPerformed
 
     private void txtcpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcpfKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcpfKeyPressed
-
-    private void txtcpfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcpfKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcpfKeyReleased
-
-    private void txtnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnomeActionPerformed
-
-    private void txtnomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnomeKeyPressed
-       
+        
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
            
             ClientesDAO dao=new ClientesDAO();
           
             dao.PesquisarClientesPorCpf(txtcpf.getText());
              
-            Clientes obj = new Clientes();
-         
-            txtnome.setText(obj.getNome());
+            Clientes obj1 = new Clientes();
+          System.out.println("capturado"+txtcpf.getText());
+            txtnomen.setText(obj1.getNome());
         
             
-         Date agora = new Date();
+        Date agora = new Date();
         SimpleDateFormat databr = new SimpleDateFormat("dd/MM/yyy");
         //DateFormat strDf = new SimpleDateFormat(“EEEE dd/MM/yyyy HH:mm:ss”);
         String dataformatada = databr.format(agora);
         txtdataatual.setText(dataformatada);
+        
         }
-    }//GEN-LAST:event_txtnomeKeyPressed
-public void listar() {
+    }//GEN-LAST:event_txtcpfKeyPressed
+
+    private void txtcpfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcpfKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcpfKeyReleased
+
+    private void txtnomenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnomenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnomenActionPerformed
+
+    private void txtnomenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnomenKeyPressed
+       
+        
+    }//GEN-LAST:event_txtnomenKeyPressed
+
+    public void listar() {
 
 //       / ClientesDAO dao = new ClientesDAO();
 //
@@ -581,36 +561,7 @@ public void listar() {
    
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Window".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
+     
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -645,7 +596,7 @@ public void listar() {
     private javax.swing.JTextField txtcpf;
     private javax.swing.JTextField txtdataatual;
     private javax.swing.JTextField txtdescricao;
-    private javax.swing.JTextField txtnome;
+    private javax.swing.JTextField txtnomen;
     private javax.swing.JTextField txtpreco;
     private javax.swing.JTextField txtqtd;
     private javax.swing.JTextField txttotal;

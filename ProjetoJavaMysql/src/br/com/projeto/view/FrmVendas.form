@@ -154,7 +154,7 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtnome" min="-2" pref="159" max="-2" attributes="0"/>
+                          <Component id="txtnomen" min="-2" pref="159" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btpesquisarcliente" min="-2" pref="134" max="-2" attributes="0"/>
                       </Group>
@@ -180,7 +180,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btpesquisarcliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtnome" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtnomen" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="41" max="32767" attributes="0"/>
               </Group>
@@ -226,10 +226,10 @@
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtcpfKeyReleased"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnome">
+        <Component class="javax.swing.JTextField" name="txtnomen">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtnomeActionPerformed"/>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtnomeKeyPressed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtnomenActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtnomenKeyPressed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -324,6 +324,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtcodigoproduto">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="1"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtcodigoprodutoActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtcodigoprodutoKeyPressed"/>
