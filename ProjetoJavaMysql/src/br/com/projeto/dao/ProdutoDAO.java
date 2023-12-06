@@ -178,8 +178,10 @@ String sql ="update tb_produtos set descricao=?,preco=?,qtd_estoque=?, for_id=? 
        
         try {
             List<Produtos> pesquisa = new ArrayList<>();
-            String sql = "select p.id,p.descricao,p.preco,p.qtd_estoque,f.nome from tb_produtos as p "
-                        + "inner join tb_fornecedores as f on(p.for_id=f.id) and p.id=?";
+            String sql = "select * from tb_produtos id=?";
+            
+            // String sql = "select p.id,p.descricao,p.preco,p.qtd_estoque,f.nome from tb_produtos as p "
+            //;;            + "inner join tb_fornecedores as f on(p.for_id=f.id) and p.id=?";
             
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1,id);
@@ -190,10 +192,10 @@ String sql ="update tb_produtos set descricao=?,preco=?,qtd_estoque=?, for_id=? 
            Produtos obj = new Produtos();
            Fornecedores f = new Fornecedores();
            /*nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado*/
-           obj.setId(rs.getInt("p.id"));
-           obj.setDescricao(rs.getString("p.descricao"));
-           obj.setPreco(rs.getDouble("p.preco"));
-           obj.setQtd_estoque(rs.getInt("p.qtd_estoque"));
+           obj.setId(rs.getInt("id"));
+           obj.setDescricao(rs.getString("descricao"));
+           obj.setPreco(rs.getDouble("preco"));
+           obj.setQtd_estoque(rs.getInt("qtd_estoque"));
            
            f.setNome(rs.getString("f.nome"));
            obj.setFornecedor(f);

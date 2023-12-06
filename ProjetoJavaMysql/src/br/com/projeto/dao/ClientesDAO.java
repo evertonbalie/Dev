@@ -177,7 +177,7 @@ String sql ="update tb_clientes set nome=?,rg=?,cpf=?,email=?,telefone=?,celular
            
             // System.out.println(""+obj.getNome());
           pesquisa.add(obj);
-             //   System.out.println("Bairro: "+obj.getBairro()+" \n Nome: "+obj.getNome());          
+               System.out.println("Bairro: "+obj.getBairro()+" \n Nome: "+obj.getNome()+""+obj.getCpf());          
             }
             
             return pesquisa;
