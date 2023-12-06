@@ -146,19 +146,19 @@ String sql ="update tb_clientes set nome=?,rg=?,cpf=?,email=?,telefone=?,celular
         }
         
     }
-     public List<Clientes> PesquisarClientesPorCpf(String cpf) {
+     public Clientes PesquisarClientesPorCpf(String cpf) {
        
         try {
-            List<Clientes> pesquisa = new ArrayList<>();
+            //List<Clientes> pesquisa = new ArrayList<>();
             String sql = "select * from tb_clientes where cpf=?";
             
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1,cpf);
-            
+             Clientes obj = new Clientes();
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){            
             
-           Clientes obj = new Clientes();
+          
            /*nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado*/
            obj.setId(rs.getInt("id"));
            obj.setNome(rs.getString("nome"));
@@ -176,11 +176,11 @@ String sql ="update tb_clientes set nome=?,rg=?,cpf=?,email=?,telefone=?,celular
            obj.setUf(rs.getString("estado"));
            
             // System.out.println(""+obj.getNome());
-          pesquisa.add(obj);
-               System.out.println("Bairro: "+obj.getBairro()+" \n Nome: "+obj.getNome()+""+obj.getCpf());          
+          //pesquisa.add(obj);
+               System.out.println("Bairro: "+obj.getBairro()+" \n Nome: "+obj.getNome()+" \ncpf"+obj.getCpf());          
             }
             
-            return pesquisa;
+            return obj;
           
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"erro dao exeption"+ e);
