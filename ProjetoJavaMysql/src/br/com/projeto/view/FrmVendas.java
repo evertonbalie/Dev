@@ -1,15 +1,23 @@
 package br.com.projeto.view;
 
-
 import br.com.projeto.dao.ClientesDAO;
 import br.com.projeto.dao.ProdutoDAO;
 import br.com.projeto.model.Clientes;
+
 import br.com.projeto.model.Produtos;
 import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import javax.swing.table.DefaultTableModel;
 
 public class FrmVendas extends javax.swing.JFrame {
+
+    
+    
+    double total,preco,subtotal;
+    int qtd;
+    DefaultTableModel carinho;
+    
     public FrmVendas() {
 
         initComponents();
@@ -161,10 +169,11 @@ public class FrmVendas extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addComponent(txtcpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(btpesquisarcliente)
-                    .addComponent(txtnomen, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtnomen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(btpesquisarcliente)))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
@@ -173,7 +182,6 @@ public class FrmVendas extends javax.swing.JFrame {
 
         jLabel5.setText("código:");
 
-        txtcodigoproduto.setText("1");
         txtcodigoproduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcodigoprodutoActionPerformed(evt);
@@ -430,17 +438,27 @@ public class FrmVendas extends javax.swing.JFrame {
 
     private void btadicionaitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btadicionaitemActionPerformed
 
+        qtd=Integer.parseInt(txtqtd.getText());
+        preco=Double.parseDouble(txtpreco.getText());
+        
+        subtotal=qtd*preco;
+        
+        total+=subtotal;
+        
+        
+        
+        
     }//GEN-LAST:event_btadicionaitemActionPerformed
 
     private void btpesquisarprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btpesquisarprodutoActionPerformed
-        // TODO add your handling code here:
-//            ProdutoDAO dao=new ProdutoDAO();
-//           
-//            dao.PesquisarProdutosPorCodigo(Integer.parseInt(txtcodigoproduto.getText()));
-//            
-//            Produtos obj = new Produtos();
-//            txtdescricao.setText(obj.getDescricao());
-//            txtpreco.setText(String.valueOf(obj.getPreco()));
+
+        ProdutoDAO dao = new ProdutoDAO();
+        Produtos obj = new Produtos();
+        obj = dao.PesquisarProdutosPorCodigo(Integer.parseInt(txtcodigoproduto.getText()));
+
+        txtdescricao.setText(obj.getDescricao());
+        txtpreco.setText(String.valueOf(obj.getPreco()));
+
     }//GEN-LAST:event_btpesquisarprodutoActionPerformed
 
     private void txttotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttotalActionPerformed
@@ -456,29 +474,37 @@ public class FrmVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_btpagamentoActionPerformed
 
     private void btpesquisarclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btpesquisarclienteActionPerformed
-  
-//           ClientesDAO dao = new ClientesDAO();
-//           dao.PesquisarClientesPorCpf(cpf);
-        
+        Clientes obj1 = new Clientes();
+        ClientesDAO dao = new ClientesDAO();
 
+        obj1 = dao.PesquisarClientesPorCpf(txtcpf.getText());
+
+        // System.out.println("capturado"+txtcpf.getText());
+        txtnomen.setText(obj1.getNome());
+
+        Date agora = new Date();
+        SimpleDateFormat databr = new SimpleDateFormat("dd/MM/yyy");
+        //DateFormat strDf = new SimpleDateFormat(“EEEE dd/MM/yyyy HH:mm:ss”);
+        String dataformatada = databr.format(agora);
+        txtdataatual.setText(dataformatada);
     }//GEN-LAST:event_btpesquisarclienteActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-    
-      
 
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
 
     private void txtcodigoprodutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoprodutoKeyPressed
 
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            ProdutoDAO dao=new ProdutoDAO();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+          
             Produtos obj = new Produtos();
-            dao.PesquisarProdutosPorCodigo(Integer.parseInt(txtcodigoproduto.getText()));
-           
+            ProdutoDAO dao = new ProdutoDAO();
+            obj = dao.PesquisarProdutosPorCodigo(Integer.parseInt(txtcodigoproduto.getText()));
+
             txtdescricao.setText(obj.getDescricao());
             txtpreco.setText(String.valueOf(obj.getPreco()));
+            System.out.println("fornecedor"+obj.getFornecedor());
 
         }
 
@@ -490,24 +516,22 @@ public class FrmVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcpfActionPerformed
 
     private void txtcpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcpfKeyPressed
-        
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-           
-            ClientesDAO dao=new ClientesDAO();
-          
-            dao.PesquisarClientesPorCpf(txtcpf.getText());
-             
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             Clientes obj1 = new Clientes();
-          System.out.println("capturado"+txtcpf.getText());
+            ClientesDAO dao = new ClientesDAO();
+
+            obj1 = dao.PesquisarClientesPorCpf(txtcpf.getText());
+
+            // System.out.println("capturado"+txtcpf.getText());
             txtnomen.setText(obj1.getNome());
-        
-            
-        Date agora = new Date();
-        SimpleDateFormat databr = new SimpleDateFormat("dd/MM/yyy");
-        //DateFormat strDf = new SimpleDateFormat(“EEEE dd/MM/yyyy HH:mm:ss”);
-        String dataformatada = databr.format(agora);
-        txtdataatual.setText(dataformatada);
-        
+
+            Date agora = new Date();
+            SimpleDateFormat databr = new SimpleDateFormat("dd/MM/yyy");
+            //DateFormat strDf = new SimpleDateFormat(“EEEE dd/MM/yyyy HH:mm:ss”);
+            String dataformatada = databr.format(agora);
+            txtdataatual.setText(dataformatada);
+
         }
     }//GEN-LAST:event_txtcpfKeyPressed
 
@@ -520,48 +544,14 @@ public class FrmVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnomenActionPerformed
 
     private void txtnomenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnomenKeyPressed
-       
-        
+
+
     }//GEN-LAST:event_txtnomenKeyPressed
 
-    public void listar() {
 
-//       / ClientesDAO dao = new ClientesDAO();
-//
-//        List<Clientes> lista = dao.listarClientes();
-//
-//        DefaultTableModel dados = (DefaultTableModel) tbprodutos.getModel();
-//
-//        dados.setNumRows(0);
-//
-//        for (Clientes c : lista) {
-//
-//            dados.addRow(new Object[]{
-//                /*nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado*/
-//                c.getId(),
-//                c.getNome(),
-//                c.getRg(),
-//                c.getCpf(),
-//                c.getEmail(),
-//                c.getTelefone(),
-//                c.getCelular(),
-//                c.getCep(),
-//                c.getEndereco(),
-//                c.getNumero(),
-//                c.getComplemento(),
-//                c.getBairro(),
-//                c.getCidade(),
-//                c.getUf()
-//
-//            });
-//
-//        }
-    }
-
-   
 
     public static void main(String args[]) {
-     
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

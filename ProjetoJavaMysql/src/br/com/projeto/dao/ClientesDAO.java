@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.projeto.dao;
 
 import br.com.projeto.jdbc.ConnectionFactory;
@@ -24,7 +20,7 @@ public class ClientesDAO {
     }
                   
     
-   public void cadastrarCliente( Clientes obj){
+public void cadastrarCliente( Clientes obj){
    
        try {
            
@@ -50,14 +46,16 @@ String sql ="insert into tb_clientes( nome,rg,cpf,email,telefone,celular,cep,end
            
            stmt.execute();
            
-            JOptionPane.showMessageDialog(null,"Cadastrado com sucesso");
+           JOptionPane.showMessageDialog(null,"Cadastrado com sucesso");
+           
            stmt.close();
+           
        } catch (Exception e) {
            JOptionPane.showMessageDialog(null,"erro"+ e);
        }
    }
    
-   public void AlterarCliente(Clientes obj ){
+public void AlterarCliente(Clientes obj ){
    
    try {
            
@@ -89,7 +87,7 @@ String sql ="update tb_clientes set nome=?,rg=?,cpf=?,email=?,telefone=?,celular
        }
    }
    
-   public void ExcluirCliente(Clientes obj){
+public void ExcluirCliente(Clientes obj){
        try {
            String sql= "delete from tb_clientes where id=?";
            PreparedStatement stmt = con.prepareStatement(sql);
@@ -103,8 +101,7 @@ String sql ="update tb_clientes set nome=?,rg=?,cpf=?,email=?,telefone=?,celular
        }
    }
    
-   
-    public List<Clientes> PesquisarClientesPorNome(String nome) {
+public List<Clientes> PesquisarClientesPorNome(String nome) {
        
         try {
             List<Clientes> pesquisa = new ArrayList<>();
@@ -146,48 +143,8 @@ String sql ="update tb_clientes set nome=?,rg=?,cpf=?,email=?,telefone=?,celular
         }
         
     }
-     public Clientes PesquisarClientesPorCpf(String cpf) {
-       
-        try {
-            
-            String sql = "select * from tb_clientes where cpf=?";
-            
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1,cpf);
-            ResultSet rs = stmt.executeQuery();
-            Clientes obj = new Clientes();
-            while(rs.next()){            
-
-           /*nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado*/
-           obj.setId(rs.getInt("id"));
-           obj.setNome(rs.getString("nome"));
-           obj.setRg(rs.getString("rg"));
-           obj.setCpf(rs.getString("cpf"));
-           obj.setEmail(rs.getString("email"));
-           obj.setTelefone(rs.getString("telefone"));
-           obj.setCelular(rs.getString("celular"));
-           obj.setCep(rs.getString("cep"));
-           obj.setEndereco(rs.getString("endereco"));
-           obj.setNumero(rs.getInt("numero"));
-           obj.setComplemento(rs.getString("complemento"));
-           obj.setBairro(rs.getString("bairro"));
-           obj.setCidade(rs.getString("cidade"));
-           obj.setUf(rs.getString("estado"));
-           
-                  System.out.println("Bairro: "+obj.getBairro()+" \n Nome: "+obj.getNome()+" \ncpf"+obj.getCpf());             
-            }
-            
-            return obj;
-            
-          
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"erro dao exeption"+ e);
-           return null;
-        }
-          
-    }
-   
-   public List<Clientes> listarClientes(){
+    
+ public List<Clientes> listarClientes(){
        try {
           
            List<Clientes> lista = new ArrayList<>();
@@ -232,7 +189,7 @@ String sql ="update tb_clientes set nome=?,rg=?,cpf=?,email=?,telefone=?,celular
        } 
    } 
    
-    public Clientes buscaCep(String cep) {
+  public Clientes buscaCep(String cep) {
        
         WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
        
@@ -251,6 +208,50 @@ String sql ="update tb_clientes set nome=?,rg=?,cpf=?,email=?,telefone=?,celular
             return null;
         }
 
-   
+  }
+
+  public Clientes PesquisarClientesPorCpf(String cpf) {
+       
+        try {
+            
+            String sql = "select * from tb_clientes where cpf=?";
+            
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1,cpf);
+            ResultSet rs = stmt.executeQuery();
+            Clientes clientes = new Clientes();
+            
+            if(rs.next()){            
+
+           /*nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado*/
+         clientes.setId(rs.getInt("id"));
+        clientes.setNome(rs.getString("nome"));
+        clientes.setRg(rs.getString("rg"));
+           clientes.setCpf(rs.getString("cpf"));
+           clientes.setEmail(rs.getString("email"));
+          clientes.setTelefone(rs.getString("telefone"));
+           clientes.setCelular(rs.getString("celular"));
+           clientes.setCep(rs.getString("cep"));
+          clientes.setEndereco(rs.getString("endereco"));
+           clientes.setNumero(rs.getInt("numero"));
+          clientes.setComplemento(rs.getString("complemento"));
+          clientes.setBairro(rs.getString("bairro"));
+           clientes.setCidade(rs.getString("cidade"));
+         clientes.setUf(rs.getString("estado"));
+           
+         
+                  System.out.println(" \n Nome: "+clientes.getNome()+" \n cpf:"+clientes.getCpf()+" \n print antes do retorno \n");            
+            }
+       
+            
+            return clientes;
+             //System.out.println(" \n Bairro: "+obj.getBairro()+" \n Nome: "+obj.getNome()+" \n cpf:"+obj.getCpf()+" \n print antes do retorno \n"); 
+          
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"erro dao exeption");
+                    //e.printStackTrace();
+           return null;
+        }
+
 }
 }
